@@ -1,0 +1,55 @@
+import java.util.*;
+
+public class task_1 {
+    public static void main(String[] args) {
+        Random r = new Random();
+        int max_attempt = 10;
+        boolean play_again = true;
+        int totalscore = 0;
+
+        Scanner sc = new Scanner(System.in);
+
+        while (play_again) {
+            int ran = r.nextInt(100) + 1;
+            int attempt = 0;
+            boolean guessed = false;
+
+            System.out.println("Guess the number between 1 and 100. You have " + max_attempt + " attempts.");
+
+            while (attempt < max_attempt) {
+                attempt++;
+                System.out.print("Attempt " + attempt + ": Enter your guess: ");
+                int g = sc.nextInt();
+
+                if (g == ran) {
+                    System.out.println("Great..! Your guess is right");
+                    guessed = true;
+                    totalscore += max_attempt - attempt + 1;
+                    break;
+                } else if (g > ran) {
+                    System.out.println("Your guess is too high");
+                } else if (g < ran) {
+                    System.out.println("Your guess is too low");
+                }
+            }
+
+            if (!guessed) {
+                System.out.println("Oops..! You've used all your attempts. The correct number was " + ran);
+            }
+
+            System.out.println("Your current score is: " + totalscore);
+            System.out.print("Do you want to play again? (yes/no): ");
+            sc.nextLine(); 
+            String response = sc.nextLine();
+
+            if (response.equalsIgnoreCase("yes")) {
+                play_again = true;
+            } else {
+                play_again = false;
+            }
+        }
+
+        System.out.println("Thank you for playing! Your final score is: " + totalscore);
+        sc.close();
+    }
+}
